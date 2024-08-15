@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import Card from "../components/card/Card";
 import axios from "axios";
+import "./Home.css";
 
 const apiUrl = import.meta.env.VITE_API;
 
@@ -35,27 +37,7 @@ const Home = () => {
       <ul>
         {postagens.map((postagem) => (
           <li key={postagem.id}>
-            <h2>{postagem.titulo}</h2>
-            <p>
-              <strong>Slug:</strong> {postagem.slug}
-            </p>
-            <p>
-              <strong>Body:</strong> {postagem.body}
-            </p>
-            <p>
-              <strong>Autor ID:</strong> {postagem.autorId}
-            </p>
-            <p>
-              <strong>Likes:</strong> {postagem.likes}
-            </p>
-            <p>
-              <strong>Comentários:</strong>
-            </p>
-            <ul>
-              {postagem.comentarios.map((comentario, index) => (
-                <li key={index}>{comentario}</li>
-              ))}
-            </ul>
+            <Card titulo={postagem.titulo} body={postagem.body}/>
           </li>
         ))}
       </ul>
