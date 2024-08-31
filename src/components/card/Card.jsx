@@ -4,7 +4,7 @@ function Card(pros) {
   const titulo = pros.titulo;
   const body = pros.body;
   return (
-    <div>
+    <div id="card">
       <h2>{titulo}</h2>
       <p>{body}</p>
     </div>
