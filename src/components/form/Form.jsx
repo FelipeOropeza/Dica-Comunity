@@ -1,28 +1,31 @@
 import React, { useState } from "react";
 
-import "./Form.css"
+import "./Form.css";
+import { Link } from "react-router-dom";
 
 function Form({ onSubmit, isLoginMode }) {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmSenha, setConfirmSenha] = useState("");
   const [nome, setNome] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    if (!isLoginMode && password !== confirmPassword) {
+
+    if (!isLoginMode && senha !== confirmSenha) {
       alert("As senhas não coincidem!");
       return;
     }
-    
-    const formData = isLoginMode ? { email, password } : { email, password, nome };
-    
+
+    const formData = isLoginMode
+      ? { email, senha }
+      : { email, senha, nome };
+
     onSubmit(formData);
 
     setEmail("");
-    setPassword("");
-    setConfirmPassword("");
+    setSenha("");
+    setConfirmSenha("");
     setNome("");
   };
 
@@ -43,7 +46,7 @@ function Form({ onSubmit, isLoginMode }) {
         <label>Email:</label>
         <input
           type="email"
-        value={email}
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
@@ -52,19 +55,21 @@ function Form({ onSubmit, isLoginMode }) {
         <label>Senha:</label>
         <input
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
           required
         />
       </div>
+
+      {isLoginMode && <Link to="../cadastro">Criar conta</Link>}
 
       {!isLoginMode && (
         <div>
           <label>Confirme a Senha:</label>
           <input
             type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={confirmSenha}
+            onChange={(e) => setConfirmSenha(e.target.value)}
             required
           />
         </div>
@@ -73,6 +78,6 @@ function Form({ onSubmit, isLoginMode }) {
       <button type="submit">{isLoginMode ? "Entrar" : "Cadastrar"}</button>
     </form>
   );
-};
+}
 
 export default Form;

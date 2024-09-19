@@ -15,8 +15,8 @@ function Home(){
   const { data: postagens, isLoading, isError, error } = useQuery({
     queryKey: ["postagens"],
     queryFn: fetchPostagens,
-    staleTime: 5 * 60 * 1000,  // 5 minutos antes de os dados serem considerados "stale"
-    refetchOnWindowFocus: true,  // Re-fetch quando a janela ganha foco
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: true,
   });
 
   if (isLoading) {
