@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 import "./Navbar.css";
+import { AuthContext } from "../../context/AuthContext";
+// import Cookies from "js-cookie";
+
 
 function Navbar() {
+  const { user, logout } = useContext(AuthContext);
+  // const token = Cookies.get('token');
+
   return (
     <div>
       <nav className="nav">
@@ -11,9 +18,18 @@ function Navbar() {
             <Link to="/">Home</Link>{" "}
           </li>
           <div className="right">
-            <li>
-              <Link to="login">Login</Link>
-            </li>
+            {user ? (
+              <>
+                <li>{user}</li>
+                <li>
+                  <button onClick={logout}>Logout</button>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link to="login">Login</Link>
+              </li>
+            )}
           </div>
         </ul>
       </nav>
