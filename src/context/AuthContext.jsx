@@ -33,10 +33,11 @@ export const AuthProvider = ({ children }) => {
 
     localStorage.removeItem("userId");
     localStorage.removeItem("user");
+    Cookies.remove("token");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, userId, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

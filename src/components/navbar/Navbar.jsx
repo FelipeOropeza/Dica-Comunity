@@ -20,7 +20,7 @@ function Navbar() {
           <div className="right">
             {user ? (
               <>
-                <li>{user}</li>
+                <li><Link to="perfil">{user}</Link></li>
                 <li>
                   <button onClick={logout}>Logout</button>
                 </li>
