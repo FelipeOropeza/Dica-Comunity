@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import LoginCadastro from "./pages/Cadastro";
 import Perfil from "./pages/Perfil";
 
-import PrivateRoute from "./components/privateroute/PrivateRoute";
+import Privateroute from "./components/privateroute/Privateroute";
 
 import "./index.css";
 
@@ -27,9 +27,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route
               path="perfil"
               element={
-                <PrivateRoute>
+                <Privateroute>
                   <Perfil />
-                </PrivateRoute>
+                </Privateroute>
               }
             />
           </Route>
