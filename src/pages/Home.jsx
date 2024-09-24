@@ -33,7 +33,7 @@ function Home(){
       <ul>
         {postagens.map((postagem) => (
           <li key={postagem.id}>
-            <Card titulo={postagem.titulo} body={postagem.body} />
+            <Card titulo={postagem.titulo} body={postagem.body} likes={10} />
           </li>
         ))}
       </ul>

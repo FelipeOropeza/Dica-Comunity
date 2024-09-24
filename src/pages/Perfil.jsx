@@ -1,6 +1,7 @@
+import { useQueryClient } from "@tanstack/react-query";
 import Formpost from "../components/formpost/Formpost";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { defer, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import React, { useContext, useState } from "react";
 
@@ -14,8 +15,7 @@ function Perfil() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
-
-
+  const queryClient = useQueryClient();
   const handlePostagem = async ({ titulo, body }) => {
     try {
       const response = await axios.post(
@@ -34,6 +34,8 @@ function Perfil() {
 
       setErrorMessage("");
       setSuccessMessage(`${response.data} Redirecionando...`);
+
+      queryClient.invalidateQueries(["postagens"]);
 
       setTimeout(() => {
         navigate("/");
