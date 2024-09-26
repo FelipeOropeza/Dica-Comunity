@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import LoginCadastro from "./pages/Cadastro";
 import Perfil from "./pages/Perfil";
+import Postagem from "./pages/Postagem";
+import NotFound from "./pages/NotFound";
 
 import Privateroute from "./components/privateroute/Privateroute";
 
@@ -32,6 +34,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 </Privateroute>
               }
             />
+            <Route
+              path="postagem/:slug"
+              element={
+                <Privateroute>
+                  <Postagem />
+                </Privateroute>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
