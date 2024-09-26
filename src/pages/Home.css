@@ -3,10 +3,5 @@ ul {
 }
 
 .container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    column-gap: 20px;
+    margin-bottom: 20px;
 }

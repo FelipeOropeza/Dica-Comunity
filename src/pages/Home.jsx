@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "../components/card/Card";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
 
@@ -29,11 +30,16 @@ function Home(){
 
   return (
     <div className="container">
-      <h1>Postagens</h1>
       <ul>
         {postagens.map((postagem) => (
           <li key={postagem.id}>
-            <Card titulo={postagem.titulo} body={postagem.body} likes={10} />
+            <Card 
+              titulo={postagem.titulo} 
+              body={postagem.body} 
+              likes={postagem.likes} 
+              comments={postagem.comments} 
+              slug={postagem.slug}
+            />
           </li>
         ))}
       </ul>
