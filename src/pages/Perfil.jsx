@@ -1,9 +1,9 @@
 import { useQueryClient } from "@tanstack/react-query";
 import Formpost from "../components/formpost/Formpost";
 import axios from "axios";
-import { defer, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 import "./Perfil.css";
 
@@ -40,7 +40,7 @@ function Perfil() {
       setTimeout(() => {
         navigate("/");
       }, 2000);
-    
+
     } catch (error) {
       const message = error.response
         ? error.response.data

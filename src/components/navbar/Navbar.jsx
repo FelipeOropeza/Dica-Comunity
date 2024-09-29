@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import "./Navbar.css";
 import { AuthContext } from "../../context/AuthContext";
+import UserMenu from "../usermenu/usermenu";
 // import Cookies from "js-cookie";
 
 
@@ -20,10 +21,7 @@ function Navbar() {
           <div className="right">
             {user ? (
               <>
-                <li><Link to="perfil">{user}</Link></li>
-                <li>
-                  <button onClick={logout}>Logout</button>
-                </li>
+                { user && <UserMenu user={user} logout={logout} />}
               </>
             ) : (
               <li>
