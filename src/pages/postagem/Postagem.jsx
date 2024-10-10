@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import NotFound from "./NotFound";
-import Card from "../components/card/Card";
+import NotFound from "../notfound/NotFound";
+import Card from "../../components/card/Card";
 
 const apiUrl = import.meta.env.VITE_API;
 

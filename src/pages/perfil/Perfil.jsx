@@ -1,8 +1,8 @@
 import { useQueryClient } from "@tanstack/react-query";
-import Formpost from "../components/formpost/Formpost";
+import Formpost from "../../components/formpost/Formpost";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { useContext, useState } from "react";
 
 import "./Perfil.css";

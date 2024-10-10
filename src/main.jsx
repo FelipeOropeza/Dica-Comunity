@@ -4,12 +4,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import App from "./App";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import LoginCadastro from "./pages/Cadastro";
-import Perfil from "./pages/Perfil";
-import Postagem from "./pages/Postagem";
-import NotFound from "./pages/NotFound";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import LoginCadastro from "./pages/cadastro/Cadastro";
+import Perfil from "./pages/perfil/Perfil";
+import Postagem from "./pages/postagem/Postagem";
+import NotFound from "./pages/notfound/NotFound";
 
 import Privateroute from "./components/privateroute/Privateroute";
 

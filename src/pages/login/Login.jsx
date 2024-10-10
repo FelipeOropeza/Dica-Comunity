@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Form from "../components/form/Form";
-import { AuthContext } from "../context/AuthContext";
+import Form from "../../components/form/Form";
+import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 
 import "./Login.css";
