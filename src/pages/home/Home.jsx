@@ -1,9 +1,7 @@
 import React from "react";
 import Card from "../../components/card/Card";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import "./Home.css";
 
 const apiUrl = import.meta.env.VITE_API;
 
@@ -12,7 +10,7 @@ const fetchPostagens = async () => {
   return response.data;
 };
 
-function Home(){
+function Home() {
   const { data: postagens, isLoading, isError, error } = useQuery({
     queryKey: ["postagens"],
     queryFn: fetchPostagens,
@@ -21,18 +19,18 @@ function Home(){
   });
 
   if (isLoading) {
-    return <div>Carregando...</div>;
+    return <div className="text-center">Carregando...</div>; // Centraliza o texto de carregando
   }
 
   if (isError) {
-    return <div>Erro ao carregar postagens: {error.message}</div>;
+    return <div className="text-center">Erro ao carregar postagens: {error.message}</div>; // Centraliza o texto de erro
   }
 
   return (
-    <div className="container">
-      <ul>
+    <div className="flex flex-col items-center p-4"> {/* Flexbox para centralizar e dar padding */}
+      <ul className="flex flex-col gap-6 w-full max-w-2xl"> {/* Flex para empilhar os cards verticalmente */}
         {postagens.map((postagem) => (
-          <li key={postagem.id}>
+          <li key={postagem.id} className="w-full"> {/* A largura do card será 100% do seu container */}
             <Card 
               titulo={postagem.titulo} 
               body={postagem.body} 
@@ -45,6 +43,6 @@ function Home(){
       </ul>
     </div>
   );
-};
+}
 
 export default Home;

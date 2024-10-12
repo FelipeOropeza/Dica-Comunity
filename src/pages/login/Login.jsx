@@ -4,8 +4,6 @@ import Form from "../../components/form/Form";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 
-import "./Login.css";
-
 const apiUrl = import.meta.env.VITE_API;
 
 function Login() {
@@ -38,11 +36,24 @@ function Login() {
   };
 
   return (
-    <div className="login">
-      <h2>Login</h2>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
-      {successMessage && <div className="success-message">{successMessage}</div>}
-      <Form onSubmit={handleLogin} isLoginMode={true} />
+    <div className="flex justify-center p-4">
+      <div className="w-full max-w-md bg-white p-8 shadow-lg rounded-lg mt-12">
+        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+
+        {errorMessage && (
+          <div className="mb-4 text-red-600 bg-red-100 p-3 rounded">
+            {errorMessage}
+          </div>
+        )}
+
+        {successMessage && (
+          <div className="mb-4 text-green-600 bg-green-100 p-3 rounded">
+            {successMessage}
+          </div>
+        )}
+
+        <Form onSubmit={handleLogin} isLoginMode={true} />
+      </div>
     </div>
   );
 }

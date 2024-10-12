@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useState } from "react";
 
-import "./Perfil.css";
-
 const apiUrl = import.meta.env.VITE_API;
 
 function Perfil() {
@@ -16,6 +14,7 @@ function Perfil() {
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
   const handlePostagem = async ({ titulo, body }) => {
     try {
       const response = await axios.post(
@@ -40,7 +39,6 @@ function Perfil() {
       setTimeout(() => {
         navigate("/");
       }, 2000);
-
     } catch (error) {
       const message = error.response
         ? error.response.data
@@ -51,12 +49,26 @@ function Perfil() {
   };
 
   return (
-    <div>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
-      {successMessage && (
-        <div className="success-message">{successMessage}</div>
-      )}
-      <Formpost onSubmit={handlePostagem} />
+    <div className="flex justify-center p-4">
+      <div className="w-full max-w-md bg-white p-8 shadow-lg rounded-lg mt-12">
+        <h2 className="text-2xl font-bold mb-6 text-center">Criar Postagem</h2>
+
+        {errorMessage && (
+          <div className="mb-4 text-red-600 bg-red-100 p-3 rounded">
+            <strong className="font-bold">Erro! </strong>
+            <span>{errorMessage}</span>
+          </div>
+        )}
+
+        {successMessage && (
+          <div className="mb-4 text-green-600 bg-green-100 p-3 rounded">
+            <strong className="font-bold">Sucesso! </strong>
+            <span>{successMessage}</span>
+          </div>
+        )}
+
+        <Formpost onSubmit={handlePostagem} />
+      </div>
     </div>
   );
 }
