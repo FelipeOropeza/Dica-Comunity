@@ -7,7 +7,8 @@ import App from "./App";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import LoginCadastro from "./pages/cadastro/Cadastro";
-import Perfil from "./pages/perfil/Perfil";
+import CriaPostagem from "./pages/criapostagem/CriaPostagem";
+import MinhasPostagens from "./pages/minhaspostagens/MinhasPostagens";
 import Postagem from "./pages/postagem/Postagem";
 import NotFound from "./pages/notfound/NotFound";
 
@@ -27,10 +28,18 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="login" element={<Login />} />
             <Route path="cadastro" element={<LoginCadastro />} />
             <Route
-              path="perfil"
+              path="cria-postagem"
               element={
                 <Privateroute>
-                  <Perfil />
+                  <CriaPostagem />
+                </Privateroute>
+              }
+            />
+            <Route
+              path="minhas-postagens/:id"
+              element={
+                <Privateroute>
+                  <MinhasPostagens />
                 </Privateroute>
               }
             />

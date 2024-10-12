@@ -5,7 +5,6 @@ function Card({ titulo, body, likes, comments, slug }) {
   return (
     <div className="bg-white border border-gray-300 rounded-lg p-8 mt-5 max-w-2xl mx-auto shadow-md transition-transform duration-200 transform hover:-translate-y-1 hover:shadow-xl">
       {" "}
-      {/* Ajustes com Tailwind */}
       {slug ? (
         <Link
           to={`/postagem/${slug}`}
