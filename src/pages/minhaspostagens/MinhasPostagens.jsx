@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import Card from "../../components/card/Card";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
@@ -8,6 +9,7 @@ const apiUrl = import.meta.env.VITE_API;
 
 function MinhasPostagens() {
   const { id } = useParams();
+  const queryClient = useQueryClient();
   const { userId, token } = useContext(AuthContext); 
   const [postagens, setPostagens] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,6 +20,25 @@ function MinhasPostagens() {
   const isValidId = (id) => {
     const uuidPattern = /^[0-9a-f]{24}$/;
     return uuidPattern.test(id);
+  };
+
+  const editarPostagem = (postagemId) => {
+    navigate(`../minhas-postagens/editar-postagem/${postagemId}`);
+  };
+
+  const excluirPostagem = async (postagemId) => {
+    try {
+      await axios.delete(`${apiUrl}postagem/${postagemId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      queryClient.invalidateQueries(["postagens"]);
+
+      setPostagens(postagens.filter((postagem) => postagem.id !== postagemId));
+    } catch (error) {
+      console.error("Erro ao excluir postagem:", error);
+    }
   };
 
   useEffect(() => {
@@ -37,7 +58,6 @@ function MinhasPostagens() {
       }
 
       try {
-        console.log("Token:", token);
         const response = await axios.get(
           `${apiUrl}postagem/minhas-postagens/${id}`, 
           {
@@ -75,6 +95,10 @@ function MinhasPostagens() {
     );
   }
 
+  if (postagens.length === 0) {
+    return <h1 className="text-center">Nenhuma postagem encontrada</h1>;
+  }
+
   return (
     <div className="flex flex-col items-center p-4">
       <ul className="flex flex-col gap-6 w-full max-w-2xl">
@@ -85,7 +109,9 @@ function MinhasPostagens() {
               body={postagem.body}
               likes={postagem.likes}
               comments={postagem.comments}
-              slug={postagem.slug}
+              isOwner={true}
+              onEdit={() => editarPostagem(postagem.id)}
+              onDelete={() => excluirPostagem(postagem.id)}
             />
           </li>
         ))}
