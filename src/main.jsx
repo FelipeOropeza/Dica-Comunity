@@ -8,6 +8,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import LoginCadastro from "./pages/cadastro/Cadastro";
 import CriaPostagem from "./pages/criapostagem/CriaPostagem";
+import EditaPostagem from "./pages/editapostagem/EditaPostagem";
 import MinhasPostagens from "./pages/minhaspostagens/MinhasPostagens";
 import Postagem from "./pages/postagem/Postagem";
 import NotFound from "./pages/notfound/NotFound";
@@ -40,6 +41,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               element={
                 <Privateroute>
                   <MinhasPostagens />
+                </Privateroute>
+              }
+            />
+            <Route
+              path="minhas-postagens/editar-postagem/:id"
+              element={
+                <Privateroute>
+                  <EditaPostagem />
                 </Privateroute>
               }
             />
