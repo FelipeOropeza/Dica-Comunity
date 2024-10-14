@@ -12,6 +12,8 @@ function Perfil() {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [titulo, setTitulo] = useState("");
+  const [body, setBody] = useState("");
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -32,6 +34,8 @@ function Perfil() {
       );
 
       setErrorMessage("");
+      setTitulo("");
+      setBody("");
       setSuccessMessage(`${response.data} Redirecionando...`);
 
       queryClient.invalidateQueries(["postagens"]);
@@ -67,7 +71,14 @@ function Perfil() {
           </div>
         )}
 
-        <Formpost onSubmit={handlePostagem} />
+        <Formpost
+          onSubmit={handlePostagem}
+          titulo={titulo}
+          body={body}
+          setTitulo={setTitulo}
+          setBody={setBody}
+          buttonText="Criar Postagem"
+        />
       </div>
     </div>
   );
