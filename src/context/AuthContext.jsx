@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(true);  
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -15,22 +15,26 @@ export const AuthProvider = ({ children }) => {
     const token = Cookies.get("token");
 
     if (storedUser && storedUserId && token) {
-      setUser(JSON.parse(storedUser));
-      setUserId(JSON.parse(storedUserId));
-      setToken(token);
+      try {
+        setUser(JSON.parse(storedUser));
+        setUserId(JSON.parse(storedUserId));
+        setToken(token);
+      } catch (error) {
+        console.error("Erro ao carregar dados do localStorage", error);
+        logout();
+      }
     } else {
-      setUser(null);
-      setUserId(null);
-      setToken(null);
+      logout();
     }
 
-    setLoading(false);
+    setLoading(false); 
   }, []);
 
   const login = (userData) => {
     const { nome, id, token } = userData;
     setUser(nome);
     setUserId(id);
+    setToken(token);
     Cookies.set("token", token, { expires: 7 });
 
     localStorage.setItem("userId", JSON.stringify(id));
@@ -40,6 +44,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     setUserId(null);
+    setToken(null);
     Cookies.remove("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("user");
