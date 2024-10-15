@@ -12,6 +12,7 @@ function MinhasPostagens() {
   const queryClient = useQueryClient();
   const { userId, token } = useContext(AuthContext); 
   const [postagens, setPostagens] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState("");
@@ -34,8 +35,12 @@ function MinhasPostagens() {
         },
       });
       queryClient.invalidateQueries(["postagens"]);
-
       setPostagens(postagens.filter((postagem) => postagem.id !== postagemId));
+      setSuccessMessage("Postagem apagada com sucesso!");
+
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
     } catch (error) {
       console.error("Erro ao excluir postagem:", error);
     }
@@ -101,6 +106,11 @@ function MinhasPostagens() {
 
   return (
     <div className="flex flex-col items-center p-4">
+      {successMessage && (
+        <div className="text-center text-green-500 mb-4">
+          {successMessage}
+        </div>
+      )}
       <ul className="flex flex-col gap-6 w-full max-w-2xl">
         {postagens.map((postagem) => (
           <li key={postagem.id} className="w-full">
