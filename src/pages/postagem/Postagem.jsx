@@ -1,23 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import NotFound from "../notfound/NotFound";
 import Card from "../../components/card/Card";
+import Comentario from "../../components/comentario/Comentario";
+import { AuthContext } from "../../context/AuthContext";
+import { useQueryClient } from "@tanstack/react-query";
+
 
 const apiUrl = import.meta.env.VITE_API;
 
 function Postagem() {
+  const { userId, token } = useContext(AuthContext);
   const { slug } = useParams();
   const navigate = useNavigate();
   const [postagem, setPostagem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const queryClient = useQueryClient(); // Usando o queryClient
 
   useEffect(() => {
     const fetchPostagem = async () => {
       try {
         const response = await axios.get(`${apiUrl}postagem/slug/${slug}`);
-        
+
         if (!response.data || response.status !== 200) {
           throw new Error("Postagem não encontrada");
         }
@@ -39,6 +46,37 @@ function Postagem() {
     fetchPostagem();
   }, [slug, navigate]);
 
+  const handleAddComment = async (newComment) => {
+    try {
+      const response = await axios.post(
+        `${apiUrl}comentario`,
+        {
+          conteudo: newComment,
+          autorId: userId,
+          postId: postagem.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      queryClient.invalidateQueries(["postagens"]);
+
+      const responsePost = await axios.get(`${apiUrl}postagem/slug/${slug}`);
+      setPostagem(responsePost.data);
+
+      setSuccessMessage("Comentário inserido com sucesso!");
+
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
+    } catch (error) {
+      console.error("Erro ao adicionar comentário:", error);
+    }
+  };
+
   if (loading) {
     return <div>Carregando...</div>;
   }
@@ -48,15 +86,28 @@ function Postagem() {
   }
 
   return (
-    <div>
-      {postagem && (
-        <Card
-          titulo={postagem.titulo}
-          body={postagem.body}
-          likes={postagem.likes}
-          comments={postagem.comments}
-        />
+    <div className="flex flex-col items-center p-4">
+      {successMessage && (
+        <div className="bg-green-500 text-white p-2 rounded mb-4">
+          {successMessage}
+        </div>
       )}
+      <ul className="flex flex-col gap-6 w-full max-w-2xl">
+        <li key={postagem.id} className="w-full">
+          {postagem && (
+            <Card
+              titulo={postagem.titulo}
+              body={postagem.body}
+              likes={postagem.likes}
+              comments={postagem.comentarios.length}
+            />
+          )}
+          <Comentario
+            comentarios={postagem.comentarios}
+            onComment={handleAddComment}
+          />
+        </li>
+      </ul>
     </div>
   );
 }

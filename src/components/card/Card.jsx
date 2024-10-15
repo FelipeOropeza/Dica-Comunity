@@ -1,7 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Card({ titulo, body, likes, comments, slug, isOwner, onEdit, onDelete }) {
+function Card({
+  titulo,
+  body,
+  likes,
+  comments,
+  slug,
+  isOwner,
+  onEdit,
+  onDelete,
+}) {
   return (
     <div className="bg-white border border-gray-300 rounded-lg p-8 mt-5 max-w-2xl mx-auto shadow-md transition-transform duration-200 transform">
       {isOwner ? (
