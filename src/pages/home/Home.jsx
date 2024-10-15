@@ -35,7 +35,7 @@ function Home() {
               titulo={postagem.titulo} 
               body={postagem.body} 
               likes={postagem.likes} 
-              comments={postagem.comments} 
+              comments={postagem.comentarios.length} // Atualizado para 'comentarios'
               slug={postagem.slug}
             />
           </li>

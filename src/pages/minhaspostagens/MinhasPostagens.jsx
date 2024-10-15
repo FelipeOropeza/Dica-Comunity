@@ -118,7 +118,7 @@ function MinhasPostagens() {
               titulo={postagem.titulo}
               body={postagem.body}
               likes={postagem.likes}
-              comments={postagem.comments}
+              comments={postagem.comentarios.length}
               isOwner={true}
               onEdit={() => editarPostagem(postagem.id)}
               onDelete={() => excluirPostagem(postagem.id)}
