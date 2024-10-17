@@ -7,6 +7,7 @@ import App from "./App";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import LoginCadastro from "./pages/cadastro/Cadastro";
+import Perfil from "./pages/perfil/Perfil";
 import CriaPostagem from "./pages/criapostagem/CriaPostagem";
 import EditaPostagem from "./pages/editapostagem/EditaPostagem";
 import MinhasPostagens from "./pages/minhaspostagens/MinhasPostagens";
@@ -28,6 +29,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/" element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="cadastro" element={<LoginCadastro />} />
+            <Route 
+              path="perfil/:id"
+              element={
+                <Privateroute>
+                  <Perfil />
+                </Privateroute>
+              }
+            />
             <Route
               path="cria-postagem"
               element={
