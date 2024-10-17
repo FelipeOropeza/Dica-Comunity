@@ -5,7 +5,9 @@ function Comentario({ comentarios, onComment, onDelete, onEdit }) {
   const { userId } = useContext(AuthContext);
   const [newComment, setNewComment] = useState("");
   const [dropdownVisible, setDropdownVisible] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false); 
   const [editedComment, setEditedComment] = useState("");
+  const [editingCommentId, setEditingCommentId] = useState(null);
 
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
@@ -22,10 +24,17 @@ function Comentario({ comentarios, onComment, onDelete, onEdit }) {
     setDropdownVisible(dropdownVisible === commentId ? null : commentId);
   };
 
-  const handleEdit = (commentId) => {
+  const openEditModal = (commentId, commentContent) => {
+    setEditingCommentId(commentId);
+    setEditedComment(commentContent);
+    setModalVisible(true); 
+  };
+
+  const handleEdit = () => {
     if (onEdit && editedComment.trim()) {
-      onEdit(commentId, editedComment);
+      onEdit(editingCommentId, editedComment);
       setEditedComment("");
+      setModalVisible(false);
       setDropdownVisible(null);
     }
   };
@@ -47,6 +56,7 @@ function Comentario({ comentarios, onComment, onDelete, onEdit }) {
           Comentar
         </button>
       </div>
+
       <div className="space-y-4">
         {comentarios.map((comentario) => (
           <div
@@ -76,13 +86,18 @@ function Comentario({ comentarios, onComment, onDelete, onEdit }) {
                   {dropdownVisible === comentario.id && (
                     <div className="absolute right-0 top-0 mt-8 bg-white shadow-lg p-2 border border-gray-300 rounded z-10">
                       <button
-                        onClick={() => handleEdit(comentario.id)}
+                        onClick={() =>
+                          openEditModal(comentario.id, comentario.conteudo)
+                        }
                         className="text-blue-500 hover:bg-blue-100 w-full text-left p-1 rounded"
                       >
                         Editar
                       </button>
                       <button
-                        onClick={() => { onDelete(comentario.id); setDropdownVisible(null); }}
+                        onClick={() => {
+                          onDelete(comentario.id);
+                          setDropdownVisible(null);
+                        }}
                         className="text-red-500 hover:bg-red-100 w-full text-left p-1 rounded"
                       >
                         Apagar
@@ -96,6 +111,34 @@ function Comentario({ comentarios, onComment, onDelete, onEdit }) {
           </div>
         ))}
       </div>
+
+      {modalVisible && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-lg font-semibold mb-4">Editar Comentário</h2>
+            <textarea
+              value={editedComment}
+              onChange={(e) => setEditedComment(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              rows="4"
+            />
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={() => setModalVisible(false)}
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 mr-2"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleEdit}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              >
+                Salvar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

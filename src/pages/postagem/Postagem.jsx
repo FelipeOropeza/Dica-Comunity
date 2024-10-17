@@ -70,7 +70,7 @@ function Postagem() {
 
       setTimeout(() => {
         setSuccessMessage("");
-      }, 3000);
+      }, 1500);
     } catch (error) {
       console.error("Erro ao adicionar comentário:", error);
     }
@@ -96,6 +96,35 @@ function Postagem() {
       }, 1500);
     } catch (error) {
       console.error("Erro ao excluir comentário:", error);
+    }
+  };
+
+  const handleUpdateComment = async (idComment, updateComment) => {
+    try {
+      await axios.put(
+        `${apiUrl}comentario/${idComment}`,
+        {
+          conteudo: updateComment,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      queryClient.invalidateQueries(["postagens"]);
+
+      const responsePost = await axios.get(`${apiUrl}postagem/slug/${slug}`);
+      setPostagem(responsePost.data);
+
+      setSuccessMessage("Comentário atualizado com sucesso!");
+
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 1500);
+    } catch (error) {
+      console.error("Erro ao atualizar comentário:", error);
     }
   };
 
@@ -128,6 +157,7 @@ function Postagem() {
             comentarios={postagem.comentarios}
             onComment={handleAddComment}
             onDelete={handleDeleteComment}
+            onEdit={handleUpdateComment}
           />
         </li>
       </ul>
