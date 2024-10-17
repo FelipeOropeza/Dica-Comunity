@@ -7,7 +7,6 @@ import Comentario from "../../components/comentario/Comentario";
 import { AuthContext } from "../../context/AuthContext";
 import { useQueryClient } from "@tanstack/react-query";
 
-
 const apiUrl = import.meta.env.VITE_API;
 
 function Postagem() {
@@ -18,7 +17,7 @@ function Postagem() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
-  const queryClient = useQueryClient(); // Usando o queryClient
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const fetchPostagem = async () => {
@@ -77,6 +76,29 @@ function Postagem() {
     }
   };
 
+  const handleDeleteComment = async (idComment) => {
+    try {
+      await axios.delete(`${apiUrl}comentario/${idComment}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      queryClient.invalidateQueries(["postagens"]);
+
+      const responsePost = await axios.get(`${apiUrl}postagem/slug/${slug}`);
+      setPostagem(responsePost.data);
+
+      setSuccessMessage("Comentário excluido com sucesso!");
+
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 1500);
+    } catch (error) {
+      console.error("Erro ao excluir comentário:", error);
+    }
+  };
+
   if (loading) {
     return <div>Carregando...</div>;
   }
@@ -105,6 +127,7 @@ function Postagem() {
           <Comentario
             comentarios={postagem.comentarios}
             onComment={handleAddComment}
+            onDelete={handleDeleteComment}
           />
         </li>
       </ul>
