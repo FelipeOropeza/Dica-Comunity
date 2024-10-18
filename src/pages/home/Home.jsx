@@ -11,7 +11,12 @@ const fetchPostagens = async () => {
 };
 
 function Home() {
-  const { data: postagens, isLoading, isError, error } = useQuery({
+  const {
+    data: postagens,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ["postagens"],
     queryFn: fetchPostagens,
     staleTime: 5 * 60 * 1000,
@@ -19,23 +24,31 @@ function Home() {
   });
 
   if (isLoading) {
-    return <div className="text-center">Carregando...</div>; // Centraliza o texto de carregando
+    return <div className="text-center">Carregando...</div>;
   }
 
   if (isError) {
-    return <div className="text-center">Erro ao carregar postagens: {error.message}</div>; // Centraliza o texto de erro
+    return (
+      <div className="text-center">
+        Erro ao carregar postagens: {error.message}
+      </div>
+    );
   }
 
+  const postagensArray = Array.isArray(postagens)
+    ? postagens
+    : postagens.data || postagens.results || [];
+
   return (
-    <div className="flex flex-col items-center p-4"> {/* Flexbox para centralizar e dar padding */}
-      <ul className="flex flex-col gap-6 w-full max-w-2xl"> {/* Flex para empilhar os cards verticalmente */}
-        {postagens.map((postagem) => (
-          <li key={postagem.id} className="w-full"> {/* A largura do card será 100% do seu container */}
-            <Card 
-              titulo={postagem.titulo} 
-              body={postagem.body} 
-              likes={postagem.likes} 
-              comments={postagem.comentarios.length} // Atualizado para 'comentarios'
+    <div className="flex flex-col items-center p-4">
+      <ul className="flex flex-col gap-6 w-full max-w-2xl">
+        {postagensArray.map((postagem) => (
+          <li key={postagem.id} className="w-full">
+            <Card
+              titulo={postagem.titulo}
+              body={postagem.body}
+              likes={postagem.likes}
+              comments={postagem.comentarios.length}
               slug={postagem.slug}
             />
           </li>
