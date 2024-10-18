@@ -37,7 +37,7 @@ function Formpost({ onSubmit, titulo, body, setTitulo, setBody, buttonText }) {
       <div>
         <input
           type="submit"
-          value={buttonText} // Usar a prop buttonText para definir o texto do botão
+          value={buttonText}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         />
       </div>
