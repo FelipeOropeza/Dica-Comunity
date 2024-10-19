@@ -14,7 +14,7 @@ import MinhasPostagens from "./pages/minhaspostagens/MinhasPostagens";
 import Postagem from "./pages/postagem/Postagem";
 import NotFound from "./pages/notfound/NotFound";
 
-import Privateroute from "./components/privateroute/Privateroute.jsx";
+import Privateroute from "./components/privateroute/Privateroute"
 
 import "./index.css";
 
