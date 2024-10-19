@@ -47,7 +47,6 @@ function Home() {
             <Card
               titulo={postagem.titulo}
               body={postagem.body}
-              likes={postagem.likes}
               comments={postagem.comentarios.length}
               slug={postagem.slug}
             />

@@ -117,7 +117,6 @@ function MinhasPostagens() {
             <Card
               titulo={postagem.titulo}
               body={postagem.body}
-              likes={postagem.likes}
               comments={postagem.comentarios.length}
               isOwner={true}
               onEdit={() => editarPostagem(postagem.id)}

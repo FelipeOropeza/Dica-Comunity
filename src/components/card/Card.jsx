@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 function Card({
   titulo,
   body,
-  likes,
   comments,
   slug,
   isOwner,
@@ -18,10 +17,6 @@ function Card({
           <h2 className="text-2xl font-bold mb-4 text-gray-900">{titulo}</h2>
           <p className="text-lg text-gray-600 leading-relaxed mb-5">{body}</p>
           <div className="card-stats flex justify-start gap-5 mt-5">
-            <div className="likes flex items-center text-gray-800 text-base">
-              <span className="text-lg">👍</span>
-              <span className="ml-2">{likes} curtidas</span>
-            </div>
             <div className="comments flex items-center text-gray-800 text-base">
               <span className="text-lg">💬</span>
               <span className="ml-2">{comments} comentários</span>
@@ -50,10 +45,6 @@ function Card({
           <h2 className="text-2xl font-bold mb-4 text-gray-900">{titulo}</h2>
           <p className="text-lg text-gray-600 leading-relaxed mb-5">{body}</p>
           <div className="card-stats flex justify-start gap-5 mt-5">
-            <div className="likes flex items-center text-gray-800 text-base">
-              <span className="text-lg">👍</span>
-              <span className="ml-2">{likes} curtidas</span>
-            </div>
             <div className="comments flex items-center text-gray-800 text-base">
               <span className="text-lg">💬</span>
               <span className="ml-2">{comments} comentários</span>
@@ -65,10 +56,6 @@ function Card({
           <h2 className="text-2xl font-bold mb-4 text-gray-900">{titulo}</h2>
           <p className="text-lg text-gray-600 leading-relaxed mb-5">{body}</p>
           <div className="card-stats flex justify-start gap-5 mt-5">
-            <div className="likes flex items-center text-gray-800 text-base">
-              <span className="text-lg">👍</span>
-              <span className="ml-2">{likes} curtidas</span>
-            </div>
             <div className="comments flex items-center text-gray-800 text-base">
               <span className="text-lg">💬</span>
               <span className="ml-2">{comments} comentários</span>

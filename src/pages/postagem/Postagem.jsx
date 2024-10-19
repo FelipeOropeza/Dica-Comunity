@@ -149,7 +149,6 @@ function Postagem() {
             <Card
               titulo={postagem.titulo}
               body={postagem.body}
-              likes={postagem.likes}
               comments={postagem.comentarios.length}
             />
           )}
