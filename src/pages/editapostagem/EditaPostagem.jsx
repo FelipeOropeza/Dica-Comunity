@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Formpost from "../../components/formpost/Formpost";
@@ -16,6 +17,7 @@ function EditaPostagem() {
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const isValidId = (id) => {
@@ -48,6 +50,9 @@ function EditaPostagem() {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      queryClient.invalidateQueries(["postagens"]);
+
       setSuccessMessage(response.data.message);
       setTimeout(() => {
         navigate(`/minhas-postagens/${userId}`);

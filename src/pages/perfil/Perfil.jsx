@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Formuser from "../../components/formuser/Formuser"
+import Formuser from "../../components/formuser/Formuser";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 
