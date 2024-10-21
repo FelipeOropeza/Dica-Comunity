@@ -1,20 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 function Comentario({ comentarios, onComment, onDelete, onEdit }) {
   const { userId } = useContext(AuthContext);
   const [newComment, setNewComment] = useState("");
   const [dropdownVisible, setDropdownVisible] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false); 
+  const [modalVisible, setModalVisible] = useState(false);
   const [editedComment, setEditedComment] = useState("");
   const [editingCommentId, setEditingCommentId] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
+    setErrorMessage("");
   };
 
   const handleCommentSubmit = () => {
-    if (onComment && newComment.trim()) {
+    if (!newComment.trim()) {
+      setErrorMessage("O comentário não pode estar vazio!");
+      setTimeout(() => {
+        setErrorMessage("")
+      }, 2000);
+      return;
+    }
+    if (onComment) {
       onComment(newComment);
       setNewComment("");
     }
@@ -27,7 +36,7 @@ function Comentario({ comentarios, onComment, onDelete, onEdit }) {
   const openEditModal = (commentId, commentContent) => {
     setEditingCommentId(commentId);
     setEditedComment(commentContent);
-    setModalVisible(true); 
+    setModalVisible(true);
   };
 
   const handleEdit = () => {
@@ -47,7 +56,7 @@ function Comentario({ comentarios, onComment, onDelete, onEdit }) {
           value={newComment}
           onChange={handleCommentChange}
           placeholder="Escreva um comentário..."
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+          className={`w-full p-2 border ${errorMessage ? "border-red-500" : "border-gray-300"} rounded-lg focus:outline-none focus:border-blue-500`}
         />
         <button
           onClick={handleCommentSubmit}
@@ -56,6 +65,10 @@ function Comentario({ comentarios, onComment, onDelete, onEdit }) {
           Comentar
         </button>
       </div>
+
+      {errorMessage && (
+        <p className="text-red-500 mb-4">{errorMessage}</p> // Exibe a mensagem de erro
+      )}
 
       <div className="space-y-4">
         {comentarios.map((comentario) => (

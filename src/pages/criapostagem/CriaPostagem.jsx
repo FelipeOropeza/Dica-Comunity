@@ -49,6 +49,10 @@ function Perfil() {
         : "Erro ao criar postagem. Tente novamente.";
       setErrorMessage(message);
       setSuccessMessage("");
+
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 2000);
     }
   };
 

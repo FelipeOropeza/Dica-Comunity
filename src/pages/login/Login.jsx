@@ -18,20 +18,24 @@ function Login() {
         email,
         senha,
       });
-      
+
       setErrorMessage("");
       setSuccessMessage("Login feito com sucesso! Redirecionando...");
 
       setTimeout(() => {
         login(response.data);
         navigate("/");
-      }, 2000); 
+      }, 2000);
     } catch (error) {
       const message = error.response
         ? error.response.data
         : "Erro desconhecido. Tente novamente mais tarde.";
       setErrorMessage(message);
-      setSuccessMessage(""); 
+      setSuccessMessage("");
+
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 2000);
     }
   };
 

@@ -7,6 +7,7 @@ function Form({ onSubmit, isLoginMode }) {
   const [confirmSenha, setConfirmSenha] = useState("");
   const [nome, setNome] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Novo estado para o confirmar senha
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,9 +17,7 @@ function Form({ onSubmit, isLoginMode }) {
       return;
     }
 
-    const formData = isLoginMode
-      ? { email, senha }
-      : { email, senha, nome };
+    const formData = isLoginMode ? { email, senha } : { email, senha, nome };
 
     onSubmit(formData);
 
@@ -29,10 +28,15 @@ function Form({ onSubmit, isLoginMode }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-sm mx-auto p-4 bg-white shadow-md rounded">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full max-w-sm mx-auto p-4 bg-white shadow-md rounded"
+    >
       {!isLoginMode && (
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Nome:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Nome:
+          </label>
           <input
             type="text"
             value={nome}
@@ -43,7 +47,9 @@ function Form({ onSubmit, isLoginMode }) {
         </div>
       )}
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Email:
+        </label>
         <input
           type="email"
           value={email}
@@ -53,7 +59,9 @@ function Form({ onSubmit, isLoginMode }) {
         />
       </div>
       <div className="mb-4 relative">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Senha:</label>
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Senha:
+        </label>
         <input
           type={showPassword ? "text" : "password"}
           value={senha}
@@ -65,6 +73,7 @@ function Form({ onSubmit, isLoginMode }) {
           type="button"
           onClick={() => setShowPassword(!showPassword)}
           className="absolute inset-y-0 right-0 px-3 text-gray-600 focus:outline-none"
+          tabIndex="-1"
         >
           {showPassword ? "👁️" : "👁️‍🗨️"}
         </button>
@@ -72,20 +81,36 @@ function Form({ onSubmit, isLoginMode }) {
 
       {!isLoginMode && (
         <div className="mb-4 relative">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Confirme a Senha:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Confirme a Senha:
+          </label>
           <input
-            type={showPassword ? "text" : "password"}
+            type={showConfirmPassword ? "text" : "password"}
             value={confirmSenha}
             onChange={(e) => setConfirmSenha(e.target.value)}
             required
             className="shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
+          <button
+            type="button"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            className="absolute inset-y-0 right-0 px-3 text-gray-600 focus:outline-none"
+            tabIndex="-1"
+          >
+            {showConfirmPassword ? "👁️" : "👁️‍🗨️"}
+          </button>
         </div>
       )}
 
       {isLoginMode && (
         <div className="flex justify-between items-center mb-4">
-          <Link to="../cadastro" className="text-blue-500 text-sm hover:underline">Criar conta</Link>
+          <Link
+            to="../cadastro"
+            className="text-blue-500 text-sm hover:underline"
+            tabIndex="-1"
+          >
+            Criar conta
+          </Link>
         </div>
       )}
 

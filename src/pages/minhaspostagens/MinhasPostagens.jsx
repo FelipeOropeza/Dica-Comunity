@@ -10,7 +10,7 @@ const apiUrl = import.meta.env.VITE_API;
 function MinhasPostagens() {
   const { id } = useParams();
   const queryClient = useQueryClient();
-  const { userId, token } = useContext(AuthContext); 
+  const { userId, token } = useContext(AuthContext);
   const [postagens, setPostagens] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -57,14 +57,16 @@ function MinhasPostagens() {
 
       if (id !== userId) {
         setIsError(true);
-        setError("Você não tem permissão para ver as postagens de outro usuário.");
+        setError(
+          "Você não tem permissão para ver as postagens de outro usuário."
+        );
         navigate("/not-found");
         return;
       }
 
       try {
         const response = await axios.get(
-          `${apiUrl}postagem/minhas-postagens/${id}`, 
+          `${apiUrl}postagem/minhas-postagens/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -80,7 +82,9 @@ function MinhasPostagens() {
       } catch (error) {
         setIsError(true);
         const errorMessage =
-          error.response?.data?.message || error.message || "Erro desconhecido.";
+          error.response?.data?.message ||
+          error.message ||
+          "Erro desconhecido.";
         setError(errorMessage);
       } finally {
         setIsLoading(false);
@@ -107,7 +111,7 @@ function MinhasPostagens() {
   return (
     <div className="flex flex-col items-center p-4">
       {successMessage && (
-        <div className="text-center text-green-500 mb-4">
+        <div className="mb-4 text-green-600 bg-green-100 p-3 rounded">
           {successMessage}
         </div>
       )}

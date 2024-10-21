@@ -21,7 +21,6 @@ function Cadastro() {
       setErrorMessage("");
       setSuccessMessage("Usuário criado com sucesso!");
 
-      // Redireciona para a página de login após 3 segundos
       setTimeout(() => {
         navigate("/login");
       }, 3000);
@@ -30,7 +29,11 @@ function Cadastro() {
         ? error.response.data
         : "Erro desconhecido. Tente novamente mais tarde.";
       setErrorMessage(message);
-      setSuccessMessage(""); // Limpa a mensagem de sucesso em caso de erro
+      setSuccessMessage("");
+
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 2000);
     }
   };
 

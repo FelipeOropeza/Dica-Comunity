@@ -5,7 +5,6 @@ function Formuser({ nome, email, senha, setNome, setEmail, setSenha, onEdit, onD
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Executa a ação de editar os dados
     const formData = { nome, email, senha };
     onEdit(formData);
   };

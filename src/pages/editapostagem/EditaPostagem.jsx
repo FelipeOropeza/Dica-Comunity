@@ -38,6 +38,12 @@ function EditaPostagem() {
         error.message ||
         "Erro ao carregar a postagem.";
       setError(errorMessage);
+
+      // Limpa a mensagem de erro após 5 segundos
+      setTimeout(() => {
+        setError("");
+        setIsError(false);
+      }, 5000);
     } finally {
       setIsLoading(false);
     }
@@ -57,6 +63,10 @@ function EditaPostagem() {
       setTimeout(() => {
         navigate(`/minhas-postagens/${userId}`);
       }, 2000);
+
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 2000);
     } catch (error) {
       setIsError(true);
       const errorMessage =
@@ -64,6 +74,11 @@ function EditaPostagem() {
         error.message ||
         "Erro ao atualizar a postagem.";
       setError(errorMessage);
+
+      setTimeout(() => {
+        setError("");
+        setIsError(false);
+      }, 2000);
     }
   };
 
