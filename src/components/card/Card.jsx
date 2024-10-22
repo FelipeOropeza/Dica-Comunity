@@ -9,12 +9,20 @@ function Card({
   isOwner,
   onEdit,
   onDelete,
+  imageUrl,
 }) {
   return (
     <div className="bg-white border border-gray-300 rounded-lg p-8 mt-5 max-w-2xl mx-auto shadow-md transition-transform duration-200 transform">
       {isOwner ? (
         <>
           <h2 className="text-2xl font-bold mb-4 text-gray-900">{titulo}</h2>
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt={titulo}
+              className="w-full h-auto mb-4 rounded"
+            />
+          )}
           <p className="text-lg text-gray-600 leading-relaxed mb-5">{body}</p>
           <div className="card-stats flex justify-start gap-5 mt-5">
             <div className="comments flex items-center text-gray-800 text-base">
@@ -43,6 +51,13 @@ function Card({
           className="text-gray-800 no-underline transition-colors duration-200 hover:text-blue-600"
         >
           <h2 className="text-2xl font-bold mb-4 text-gray-900">{titulo}</h2>
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt={titulo}
+              className="w-full h-auto mb-4 rounded"
+            />
+          )}
           <p className="text-lg text-gray-600 leading-relaxed mb-5">{body}</p>
           <div className="card-stats flex justify-start gap-5 mt-5">
             <div className="comments flex items-center text-gray-800 text-base">
@@ -54,6 +69,13 @@ function Card({
       ) : (
         <>
           <h2 className="text-2xl font-bold mb-4 text-gray-900">{titulo}</h2>
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt={titulo}
+              className="w-full h-auto mb-4 rounded"
+            />
+          )}
           <p className="text-lg text-gray-600 leading-relaxed mb-5">{body}</p>
           <div className="card-stats flex justify-start gap-5 mt-5">
             <div className="comments flex items-center text-gray-800 text-base">

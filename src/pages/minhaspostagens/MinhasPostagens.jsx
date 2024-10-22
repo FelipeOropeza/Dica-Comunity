@@ -125,6 +125,7 @@ function MinhasPostagens() {
               isOwner={true}
               onEdit={() => editarPostagem(postagem.id)}
               onDelete={() => excluirPostagem(postagem.id)}
+              imageUrl={postagem.imageUrl}
             />
           </li>
         ))}

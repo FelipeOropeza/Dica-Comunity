@@ -49,6 +49,7 @@ function Home() {
               body={postagem.body}
               comments={postagem.comentarios.length}
               slug={postagem.slug}
+              imageUrl={postagem.imageUrl}
             />
           </li>
         ))}

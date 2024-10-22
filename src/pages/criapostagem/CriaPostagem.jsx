@@ -14,28 +14,25 @@ function Perfil() {
   const [successMessage, setSuccessMessage] = useState("");
   const [titulo, setTitulo] = useState("");
   const [body, setBody] = useState("");
+  const [file, setFile] = useState(null);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const handlePostagem = async ({ titulo, body }) => {
+  const handlePostagem = async (formData) => {
     try {
-      const response = await axios.post(
-        `${apiUrl}postagem`,
-        {
-          titulo,
-          body,
-          autorId: userId,
+      formData.append("autorId", userId);
+
+      const response = await axios.post(`${apiUrl}postagem`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      });
 
       setErrorMessage("");
       setTitulo("");
       setBody("");
+      setFile(null);
       setSuccessMessage(`${response.data} Redirecionando...`);
 
       queryClient.invalidateQueries(["postagens"]);
@@ -81,6 +78,7 @@ function Perfil() {
           body={body}
           setTitulo={setTitulo}
           setBody={setBody}
+          setFile={setFile}
           buttonText="Criar Postagem"
         />
       </div>

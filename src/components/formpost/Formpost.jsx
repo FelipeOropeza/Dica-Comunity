@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Formpost({ onSubmit, titulo, body, setTitulo, setBody, buttonText }) {
+  const [file, setFile] = useState(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData = { titulo, body };
+    const formData = new FormData();
+    formData.append("titulo", titulo);
+    formData.append("body", body);
+    if (file) {
+      formData.append("image", file);
+    }
 
     onSubmit(formData);
   };
@@ -33,6 +40,15 @@ function Formpost({ onSubmit, titulo, body, setTitulo, setBody, buttonText }) {
           required
           style={{ resize: "none" }}
         ></textarea>
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">Imagem:</label>
+        <input
+          type="file"
+          onChange={(e) => setFile(e.target.files[0])}
+          className="shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          accept="image/*"
+        />
       </div>
       <div>
         <input
