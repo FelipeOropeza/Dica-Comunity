@@ -10,7 +10,7 @@ function Formpost({ onSubmit, titulo, body, setTitulo, setBody, buttonText }) {
     formData.append("titulo", titulo);
     formData.append("body", body);
     if (file) {
-      formData.append("image", file);
+      formData.append("imageUrl", file);
     }
 
     onSubmit(formData);
@@ -45,6 +45,7 @@ function Formpost({ onSubmit, titulo, body, setTitulo, setBody, buttonText }) {
         <label className="block text-gray-700 text-sm font-bold mb-2">Imagem:</label>
         <input
           type="file"
+          required
           onChange={(e) => setFile(e.target.files[0])}
           className="shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           accept="image/*"

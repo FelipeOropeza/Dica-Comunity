@@ -150,6 +150,7 @@ function Postagem() {
               titulo={postagem.titulo}
               body={postagem.body}
               comments={postagem.comentarios.length}
+              imageUrl={postagem.imageUrl}
             />
           )}
           <Comentario

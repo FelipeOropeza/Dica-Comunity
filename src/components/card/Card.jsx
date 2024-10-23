@@ -20,7 +20,7 @@ function Card({
             <img
               src={imageUrl}
               alt={titulo}
-              className="w-full h-auto mb-4 rounded"
+              className="w-full h-auto mb-4 rounded" // Removendo a altura fixa para manter o tamanho original
             />
           )}
           <p className="text-lg text-gray-600 leading-relaxed mb-5">{body}</p>
@@ -55,7 +55,7 @@ function Card({
             <img
               src={imageUrl}
               alt={titulo}
-              className="w-full h-auto mb-4 rounded"
+              className="w-full h-auto mb-4 rounded" // Removendo a altura fixa para manter o tamanho original
             />
           )}
           <p className="text-lg text-gray-600 leading-relaxed mb-5">{body}</p>
@@ -73,7 +73,7 @@ function Card({
             <img
               src={imageUrl}
               alt={titulo}
-              className="w-full h-auto mb-4 rounded"
+              className="w-full h-auto mb-4 rounded" // Removendo a altura fixa para manter o tamanho original
             />
           )}
           <p className="text-lg text-gray-600 leading-relaxed mb-5">{body}</p>
