@@ -17,7 +17,6 @@ function Cadastro() {
         email,
         senha,
       });
-      console.log(response.data);
       setErrorMessage("");
       setSuccessMessage("Usuário criado com sucesso!");
 

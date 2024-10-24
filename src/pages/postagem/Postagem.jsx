@@ -27,7 +27,6 @@ function Postagem() {
         if (!response.data || response.status !== 200) {
           throw new Error("Postagem não encontrada");
         }
-
         setPostagem(response.data);
       } catch (error) {
         setError("Postagem não encontrada");

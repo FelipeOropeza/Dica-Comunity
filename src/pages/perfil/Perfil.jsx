@@ -24,7 +24,6 @@ function Perfil() {
             Authorization: `Bearer ${token}`,
           },
         });
-
         setNome(response.data.nome);
         setEmail(response.data.email);
       } catch (error) {

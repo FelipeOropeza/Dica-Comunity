@@ -76,6 +76,7 @@ function Perfil() {
           onSubmit={handlePostagem}
           titulo={titulo}
           body={body}
+          noteditimg={false}
           setTitulo={setTitulo}
           setBody={setBody}
           setFile={setFile}

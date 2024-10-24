@@ -13,6 +13,7 @@ function EditaPostagem() {
   const [postagem, setPostagem] = useState(null);
   const [titulo, setTitulo] = useState("");
   const [body, setBody] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState("");
@@ -28,9 +29,11 @@ function EditaPostagem() {
   const fetchPostagem = async () => {
     try {
       const response = await axios.get(`${apiUrl}postagem/id/${id}`);
+
       setPostagem(response.data);
       setTitulo(response.data.titulo);
       setBody(response.data.body);
+      setImageUrl(response.data.imageUrl);
     } catch (error) {
       setIsError(true);
       const errorMessage =
@@ -39,7 +42,6 @@ function EditaPostagem() {
         "Erro ao carregar a postagem.";
       setError(errorMessage);
 
-      // Limpa a mensagem de erro após 5 segundos
       setTimeout(() => {
         setError("");
         setIsError(false);
@@ -51,11 +53,24 @@ function EditaPostagem() {
 
   const updatePostagem = async (formData) => {
     try {
-      const response = await axios.put(`${apiUrl}postagem/${id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
       });
+
+      const response = await axios.put(
+        `${apiUrl}postagem/${id}`,
+        {
+          titulo: formDataObject.titulo,
+          body: formDataObject.body,
+          imageUrl: imageUrl,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       queryClient.invalidateQueries(["postagens"]);
 
