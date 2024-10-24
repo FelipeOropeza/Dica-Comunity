@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as filledHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as emptyHeart } from "@fortawesome/free-regular-svg-icons";
@@ -20,6 +20,7 @@ function Card({
   imageUrl,
 }) {
   const { userId, token } = useContext(AuthContext);
+  const navigate = useNavigate(); 
   const [like, setLike] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -34,6 +35,10 @@ function Card({
   }, [postId]);
 
   const handleLike = async () => {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
     try {
       const response = await axios.post(
         `${apiUrl}like/${postId}`,
