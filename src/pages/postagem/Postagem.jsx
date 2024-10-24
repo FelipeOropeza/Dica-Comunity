@@ -146,6 +146,7 @@ function Postagem() {
         <li key={postagem.id} className="w-full">
           {postagem && (
             <Card
+              postId={postagem.id}
               titulo={postagem.titulo}
               body={postagem.body}
               comments={postagem.comentarios.length}

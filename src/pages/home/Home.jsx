@@ -45,6 +45,7 @@ function Home() {
         {postagensArray.map((postagem) => (
           <li key={postagem.id} className="w-full">
             <Card
+              postId={postagem.id}
               titulo={postagem.titulo}
               body={postagem.body}
               comments={postagem.comentarios.length}

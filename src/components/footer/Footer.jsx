@@ -11,6 +11,7 @@ function Footer() {
             Email:{" "}
             <a
               href="mailto:felipe2006.co@gmail.com"
+              tabIndex="-1"
               className="text-blue-500 hover:underline"
             >
               felipe2006.co@gmail.com
@@ -20,6 +21,7 @@ function Footer() {
             Telefone:{" "}
             <a
               href="tel:+5511911844044"
+              tabIndex="-1"
               className="text-blue-500 hover:underline"
             >
               (11) 91184-4044
@@ -31,6 +33,7 @@ function Footer() {
               href="https://www.linkedin.com/in/felipeoropeza"
               className="text-blue-500 hover:underline"
               target="_blank"
+              tabIndex="-1"
               rel="noopener noreferrer"
             >
               www.linkedin.com/in/felipeoropeza
@@ -41,6 +44,7 @@ function Footer() {
             <a
               href="https://github.com/FelipeOropeza"
               className="text-blue-500 hover:underline"
+              tabIndex="-1"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -51,7 +55,8 @@ function Footer() {
 
         {/* Direitos autorais */}
         <div className="mt-4 text-gray-500 text-sm">
-          © {new Date().getFullYear()} Felipe Oropeza. Todos os direitos reservados.
+          © {new Date().getFullYear()} Felipe Oropeza. Todos os direitos
+          reservados.
         </div>
       </div>
     </footer>
