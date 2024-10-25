@@ -4,6 +4,7 @@ import Card from "../../components/card/Card";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import CardSkeleton from "../../components/cardskeleton/Cardskeleton";
 
 const apiUrl = import.meta.env.VITE_API;
 
@@ -95,7 +96,15 @@ function MinhasPostagens() {
   }, [apiUrl, token, id, userId, navigate]);
 
   if (isLoading) {
-    return <div className="text-center">Carregando...</div>;
+    return (
+      <div className="flex flex-col items-center p-4">
+        <ul className="flex flex-col gap-6 w-full max-w-2xl">
+          <li>
+            <CardSkeleton />
+          </li>
+        </ul>
+      </div>
+    );
   }
 
   if (isError) {

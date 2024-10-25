@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import NotFound from "../notfound/NotFound";
 import Card from "../../components/card/Card";
+import CardSkeleton from "../../components/cardskeleton/Cardskeleton";
 import Comentario from "../../components/comentario/Comentario";
 import { AuthContext } from "../../context/AuthContext";
 import { useQueryClient } from "@tanstack/react-query";
@@ -23,7 +24,6 @@ function Postagem() {
     const fetchPostagem = async () => {
       try {
         const response = await axios.get(`${apiUrl}postagem/slug/${slug}`);
-
         if (!response.data || response.status !== 200) {
           throw new Error("Postagem não encontrada");
         }
@@ -46,7 +46,7 @@ function Postagem() {
 
   const handleAddComment = async (newComment) => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${apiUrl}comentario`,
         {
           conteudo: newComment,
@@ -61,15 +61,8 @@ function Postagem() {
       );
 
       queryClient.invalidateQueries(["postagens"]);
-
-      const responsePost = await axios.get(`${apiUrl}postagem/slug/${slug}`);
-      setPostagem(responsePost.data);
-
-      setSuccessMessage("Comentário inserido com sucesso!");
-
-      setTimeout(() => {
-        setSuccessMessage("");
-      }, 1500);
+      fetchPostagemAtualizada();
+      mostrarMensagem("Comentário inserido com sucesso!");
     } catch (error) {
       console.error("Erro ao adicionar comentário:", error);
     }
@@ -84,15 +77,8 @@ function Postagem() {
       });
 
       queryClient.invalidateQueries(["postagens"]);
-
-      const responsePost = await axios.get(`${apiUrl}postagem/slug/${slug}`);
-      setPostagem(responsePost.data);
-
-      setSuccessMessage("Comentário excluido com sucesso!");
-
-      setTimeout(() => {
-        setSuccessMessage("");
-      }, 1500);
+      fetchPostagemAtualizada();
+      mostrarMensagem("Comentário excluído com sucesso!");
     } catch (error) {
       console.error("Erro ao excluir comentário:", error);
     }
@@ -113,22 +99,39 @@ function Postagem() {
       );
 
       queryClient.invalidateQueries(["postagens"]);
-
-      const responsePost = await axios.get(`${apiUrl}postagem/slug/${slug}`);
-      setPostagem(responsePost.data);
-
-      setSuccessMessage("Comentário atualizado com sucesso!");
-
-      setTimeout(() => {
-        setSuccessMessage("");
-      }, 1500);
+      fetchPostagemAtualizada();
+      mostrarMensagem("Comentário atualizado com sucesso!");
     } catch (error) {
       console.error("Erro ao atualizar comentário:", error);
     }
   };
 
+  const fetchPostagemAtualizada = async () => {
+    try {
+      const response = await axios.get(`${apiUrl}postagem/slug/${slug}`);
+      setPostagem(response.data);
+    } catch (error) {
+      console.error("Erro ao atualizar a postagem:", error);
+    }
+  };
+
+  const mostrarMensagem = (mensagem) => {
+    setSuccessMessage(mensagem);
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 1500);
+  };
+
   if (loading) {
-    return <div>Carregando...</div>;
+    return (
+      <div className="flex flex-col items-center p-4">
+        <ul className="flex flex-col gap-6 w-full max-w-2xl">
+          <li>
+            <CardSkeleton />
+          </li>
+        </ul>
+      </div>
+    );
   }
 
   if (error) {

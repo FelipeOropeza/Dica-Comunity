@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../../components/card/Card";
+import CardSkeleton from "../../components/cardskeleton/Cardskeleton";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -24,7 +25,19 @@ function Home() {
   });
 
   if (isLoading) {
-    return <div className="text-center">Carregando...</div>;
+    return (
+      <div className="flex flex-col items-center p-4">
+        <ul className="flex flex-col gap-6 w-full max-w-2xl">
+          {Array(3)
+            .fill()
+            .map((_, index) => (
+              <li key={index}>
+                <CardSkeleton />
+              </li>
+            ))}
+        </ul>
+      </div>
+    );
   }
 
   if (isError) {
