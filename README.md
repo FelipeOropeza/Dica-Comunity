@@ -5,7 +5,12 @@ Este é o frontend da aplicação **DicaCommunity**, uma plataforma de compartil
 ## Tecnologias Utilizadas
 
 - **React**: para criação de uma interface dinâmica e responsiva.
-- **React Router**: para gerenciamento de rotas.
+- **React Router**: para gerenciamento de rotas e navegação com `useNavigate`.
+- **React Query**: para gerenciamento de dados e requisições com `useQuery` e `useQueryClient`.
+- **useState** e **useEffect**: para gerenciamento de estado e efeitos colaterais.
+- **useContext**: para compartilhar dados entre componentes.
+- **useParams**: para acessar parâmetros da URL.
+- **axios**: para fazer requisições HTTP.
 - **Tailwind CSS**: para estilos otimizados e design moderno.
 
 ## Funcionalidades Principais
@@ -19,8 +24,8 @@ Este é o frontend da aplicação **DicaCommunity**, uma plataforma de compartil
 
 1. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seu-usuario/dicacommunity-backend.git
-   cd dicacommunity-backend
+   git clone https://github.com/FelipeOropeza/Dica-Comunity.git
+   cd Dica-Comunity
 
 2. **Certifique-se de ter o Node.js instalado**:
   Versão mínima recomendada: 14.x
