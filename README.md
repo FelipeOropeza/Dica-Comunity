@@ -10,9 +10,11 @@ Este é o frontend da aplicação **DicaCommunity**, uma plataforma de compartil
 - **useState** e **useEffect**: para gerenciamento de estado e efeitos colaterais.
 - **useContext**: para compartilhar dados entre componentes.
 - **useParams**: para acessar parâmetros da URL.
-- **axios**: para fazer requisições HTTP.
+- **Axios**: para fazer requisições HTTP.
 - **Tailwind CSS**: para estilos otimizados e design moderno.
 - **Dotenv**: Carrega variáveis de ambiente a partir de um arquivo `.env`, mantendo segredos e configurações fora do código-fonte.
+- **Js-cookie**: Biblioteca para gerenciar cookies em JavaScript.
+
 
 ## Funcionalidades Principais
 
