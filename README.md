@@ -12,6 +12,7 @@ Este é o frontend da aplicação **DicaCommunity**, uma plataforma de compartil
 - **useParams**: para acessar parâmetros da URL.
 - **axios**: para fazer requisições HTTP.
 - **Tailwind CSS**: para estilos otimizados e design moderno.
+- **Dotenv**: Carrega variáveis de ambiente a partir de um arquivo `.env`, mantendo segredos e configurações fora do código-fonte.
 
 ## Funcionalidades Principais
 
